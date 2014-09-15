@@ -39,9 +39,9 @@
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Example} % Listing -> Example
 
-\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 1.7}
+\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.0}
 \author{The University of Queensland\\School of Information Technology and Electrical Engineering}
-\date{Semester 2 2013}
+\date{September 2014}
 
 \begin{document}
 
@@ -49,70 +49,135 @@
 
 Programs written for CSSE2310/7231 assignments must follow the style guidelines outlined in this document.
 
+Where the style guide is open to interpretation, the choices you make regarding your personal style must be consistent throughout your project.
 
 \section{Naming Conventions}
+\subsection{Variable and File names}
 Variable names and file names will begin with a lowercase letter and names with multiple words will use initial capitals for subsequent words.
 Names that are chosen should be meaningful and Hungarian notation is NOT to be used.
-Source files must be named with the suffix .c (lower case).
+Source files must be named with the suffix \texttt{.c} or \texttt{.h} (lower case).
 
 Example variable names: \texttt{book}, \texttt{newCount}, \texttt{setWordLength}
 
-Example filenames: \texttt{hello.c}, \texttt{stringRoutines.c}
+Example filenames: \texttt{hello.c}, \texttt{stringRoutines.c}, \texttt{shared.h}
 
-\bigskip
-\#define’d constants are in all uppercase letters and underscores (\_) are used to separate multiple words.
-(the exceptions are defines true and false to comply with c99).
+Unacceptable variable names: \texttt{FILE *fp; char *aPtr; char *thingStr;}
+
+\subsection{Defined Constants}
+\label{sec:naming-constants}
+\#define’d constants are in all uppercase letters, with underscores (\_) being used to seperate multiple words. (The exceptions are defines \texttt{true} and \texttt{false} to comply with c99).
 
 Examples: \texttt{MAX\_BIT}, \texttt{DEFAULT\_SPEED}
 
-\bigskip
+\subsection{Function names}
 Function names should all be lowercase and use underscores to separate multiple words.
 
 Example function names: \texttt{main()}, \texttt{reset\_secret\_string()}
 
-\bigskip
+\subsection{Type names}
+\label{sec:type-names}
 Type names (i.e. from typedefs), structure and union names should begin with capital letters and use initial capitals for subsequent words.
 
-Example typedef/structure/union names: \texttt{SortType}, \texttt{FileData}
+Example typedef/structure/union names: \texttt{SortType}, \texttt{FileData}, \texttt{struct Node}
+
+\begin{multicols}{2}
+\lstset{caption={Struct naming and declaration}, label={lst:naming-struct}}
+\begin{lstlisting}
+/* A player within the game */
+struct Player {
+    char *name;
+    int score;
+    struct Player *next;
+};
+\end{lstlisting}
+\vfill
+\columnbreak
+
+\lstset{caption={Typedef struct naming and declaration}, label={lst:naming-typedef-struct}}
+\begin{lstlisting}
+/* Point (coordinate) */
+typedef struct {
+    int x;
+    int y;
+} Point;
+\end{lstlisting}
+\end{multicols}
+
+\clearpage
+\subsection{Enumerated Types}
+Enumerated types must be named in the same way as any other type (see~\ref{sec:type-names}).
+Members of an enumerated type must follow the same naming as constants (see~\ref{sec:naming-constants}).
+
+\begin{multicols}{2}
+\lstset{caption={Enumerated type naming and horizontal layout}, label={lst:enum-horizontal}}
+\begin{lstlisting}
+/* Card suits */
+enum CardSuits {
+    CLUBS, DIAMONDS, HEARTS, SPADES
+};
+\end{lstlisting}
+\vfill
+\columnbreak
+
+\lstset{caption={Enumerated type naming and vertical layout, with explicit value selection}, label={lst:enum-vertical}}
+\begin{lstlisting}
+/* Program exit codes */
+enum ExitCodes {
+    EXIT_SUCCESS = 0,
+    EXIT_ARGS = 1,
+    EXIT_FAILURE = 2
+};
+\end{lstlisting}
+\end{multicols}
 
 
 \section{Comments}
-Comments should be generously added to describe the code.
-The comments should explain what is happening, how it is being done, what parameters mean, which global variables are used and which are modified, and any restrictions or bugs.
-Comments must be present and meaningful for at least every global variable declaration and function declaration or definition and other comments are expected in code which is tricky, lengthy or where functionality is not immediately obvious.
-(If an adequate comment is given for a function declaration, it neednot be repeated for the associated function definition.)
+Comments should be generously added to describe the intent of the code.
+Comments must be present and meaningful for at least every global variable declaration and function declaration or definition.
+Other comments are expected in code which is tricky, lengthy or where functionality is not immediately obvious.
+It is reasonable to assume that the reader has a decent knowledge of the C programming language, so it is not necessary to comment every line within a function.
+
+Function comments should describe parameters, return values and error conditions.
+They should not include parameter types, nor should they include the function prototype.
+If an adequate comment is given for a function declaration, it need not be repeated for the associated function definition.
 
 No comment is needed for the main() function.
 
 You may use \texttt{//} comments in c99 assignments.
 
-\lstset{caption={Comments}, label={lst:comments}}
+\lstset{caption={Comments for global variables and function prototypes}, label={lst:comments-global}}
 \begin{lstlisting}
-float bookPrice; /* The price of the book, user input */
-int sum_function (int a, int b); /* Returns the sum of a and b */
+/* Global Variables */
+/* The map to use for the game */
+char **map;
+/* Width of the map */
+int width;
+
+/* Prototypes (NOTE: function comments are not required here.) */
+/* Returns the sum of a and b */
+int sum_function(int a, int b);
 \end{lstlisting}
 
 
 \clearpage
 \section{Braces}
 Use braces \texttt{\{ \}} around statements in the body of if, else, for, while, do, etc statements.
-The C language does not require braces when the body contains only one statement, but you must surround it with braces anyway. This helps avoid errors while changing your code.
-An open brace appears at the end of the line after function arguments/loop statement/etc (with at least one space before the brace).
+The C language does not require braces when the body contains only one statement, but you must surround it with braces anyway.
+This helps avoid errors while changing your code.
+An open brace appears at the end of the line after an if statement/loop statement/etc (with at least one space before the brace).
 The closing brace should be lined up underneath the start of the function/loop statement/etc.
 Braces for structure declarations and array initialisations do not need to follow this layout.
 
-The opening brace for a \textbf{function definition} may be either at the end of the line following the arguments or in the left most column of the next line.
+The opening brace for a function definition may be either at the end of the line following the arguments or in the left most column of the next line.
 
 \lstset{caption={Correct braces for a function}, label={lst:braces-function}}
 \begin{lstlisting}
-/*
-** sum(int n)
-**   - returns the integer sum of integers
-**     1 through n. Will return 0 if n is 0
-**     or less.
-**     (Note: won’t work if n is large enough to cause the sum to overflow)
-*/
-int sum(int n) { /* This brace can be at the start of next line if desired */
+/**
+ * Calculates the integer sum of integers 1 through n.
+ * Returns this sum, or 0 if n is 0 or less.
+ * (Note: won't work if n is large enough to cause the sum to overflow)
+ */
+int sum(int n) { /* This brace can be at the start of the next line */
     int i, s = 0;
 
     for (i = 1; i <= n; i++) { /* This brace must be here */
@@ -187,27 +252,48 @@ Organize your source code into meaningful parts.
 For example, use blank lines to separate functions from each other.
 Blank lines are also used to separate groups of statements from each other to make the major steps of an algorithm distinguishable.
 
+\lstset{caption={Acceptable vertical whitespace between functions}, label={lst:vertical-whitespace}}
+\begin{lstlisting}
+/* Multiply two numbers */
+int multiply(int x, int y) {
+    return x * y;
+}
+
+/* Divide two numbers */
+int divide(int x, int y) {
+    return x / y;
+}
+\end{lstlisting}
+
 \subsection{Horizontal whitespace}
 Use horizontal whitespace to organize each line of code into meaningful parts.
 It is bad style to not use spaces within a line.
-Space must be added after each comma and semicolon and either side of assignment operators (\texttt{=, +=} etc).
-Other spaces (e.g. around operators such as \texttt{<} and \texttt{+} or before parentheses) can be added at your discretion.
+Space must be added after each comma and semicolon.
+Space should also be added either side of all assignment and binary operators (\texttt{=~+=~/~-~*~+}~etc).
+There should be no spaces added around unary operators (\texttt{\&~*~+~-~\propertilde~!~++~--}) and struct operators (\texttt{point->x}, \texttt{player.name}).
 
 \begin{multicols}{2}
 \lstset{caption={Acceptable horizontal whitespace: commas}, label={lst:horiz-good-comma}}
 \begin{lstlisting}
 add_up(a, b, c, d);
+int *a, b, c[10];
 \end{lstlisting}
 
 \lstset{caption={Acceptable horizontal whitespace: semi-colons}, label={lst:horiz-good-semicolon}}
 \begin{lstlisting}
-for(i = 0; i<10; i++)
+for (i = 0; i<10; i++)
 \end{lstlisting}
 
 \lstset{caption={Acceptable horizontal whitespace: assignment and binary operators}, label={lst:horiz-good-assign}}
 \begin{lstlisting}
 a = (b + c) * d;
-a = (b+c)*d;
+\end{lstlisting}
+
+\lstset{caption={Acceptable horizontal whitespace: unary and struct operators}, label={lst:horiz-good-unary}}
+\begin{lstlisting}
+int x = -y;
+b = *c;
+width = point->y;
 \end{lstlisting}
 \vfill
 \columnbreak
@@ -215,22 +301,30 @@ a = (b+c)*d;
 \lstset{caption={Unacceptable horizontal whitespace: commas}, label={lst:horiz-bad-comma}}
 \begin{lstlisting}
 add_up(a,b,c,d);
+int * a,b,c[10];
 \end{lstlisting}
 
 \lstset{caption={Unacceptable horizontal whitespace: semi-colons}, label={lst:horiz-bad-semicolon}}
 \begin{lstlisting}
-for(i=0;i<10;i++)
+for (i=0;i<10;i++)
 \end{lstlisting}
 
 \lstset{caption={Unacceptable horizontal whitespace: assignment and binary operators}, label={lst:horiz-bad-assign}}
 \begin{lstlisting}
 a=(b+c)*d;
 \end{lstlisting}
+
+\lstset{caption={Unacceptable horizontal whitespace: unary and struct operators}, label={lst:horiz-bad-unary}}
+\begin{lstlisting}
+int x = - y;
+b = * c;
+width = point -> y;
+\end{lstlisting}
 \end{multicols}
 
 \clearpage
 \section{Indentation}
-Use indentations to indicate the level of nesting.
+Use indentation to indicate the level of nesting.
 Indentation must occur in multiples of four spaces.
 You should configure your editor so that indents are in multiples of four spaces (but tab stops must remain at 8 characters).
 You should indent once each time a statement is nested inside the body of another statement.
@@ -313,7 +407,7 @@ if(expressionA || expressionB || expressionC || expressionD ||
 
 \section{Overall}
 \subsection{Compilation}
-Your assignments use either ``ANSI C'' or C99 (Your lecturer will tell you which one applies).
+Your assignments use either ``ANSI C'' (C90) or C99 (Your lecturer will tell you which one applies).
 
 For ANSI C you must compile with the flags: \texttt{-Wall -pedantic -ansi}
 
@@ -322,10 +416,19 @@ For C99 use: \texttt{-Wall -pedantic -std=gnu99}
 No warnings or errors should be reported.
 If warnings or errors are reported, they will be treated as style violations.
 
-In general, functions should not exceed one page of statements (when printed in a reasonable font, i.e. about 50 lines maximum).
-If a function is longer than this, then it is a good candidate for being broken into meaningful smaller functions.
-In exceptional circumstances (which should be documented with a comment), functions may be longer than a page.
+Every .c file in your assignment submission (and any custom .h files they \#include) will be checked for style.
+This applies whether or not they are linked into executables.
+To facilitate this process, any .c files in your submission which do not compile individually (ie \texttt{gcc -c file.c} +relevant flags) will attract an additional penalty equivalent to 5 compiler warnings per file.
 
+Every .h file in your submission must make sense without reference to any other files other than those which it \#includes.
+Specifically, any declarations must be complete and all types, declarations and any definitions used in the .h file must either come from the .h file itself, or from included headers.
+
+\subsection{Function length}
+Functions should not exceed 50 lines in length, including any comments.
+If a function is longer than 50 lines, then it is a good candidate for being broken into meaningful smaller functions.
+In exceptional circumstances (which should be documented with a comment), functions may be longer than 50 lines.
+
+\subsection{Modularity}
 Principles of modularity should be observed.
 Related functions and variable definitions should be separated out into their own source files (with appropriate header files for inclusion in other modules as necessary).
 You should also use functions to prevent excessive duplication of code.
