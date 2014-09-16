@@ -39,7 +39,7 @@
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Example} % Listing -> Example
 
-\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.0}
+\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.1}
 \author{The University of Queensland\\School of Information Technology and Electrical Engineering}
 \date{September 2014}
 
@@ -53,6 +53,7 @@ Where the style guide is open to interpretation, the choices you make regarding 
 
 \section{Naming Conventions}
 \subsection{Variable and File names}
+\label{sec:naming-variable}
 Variable names and file names will begin with a lowercase letter and names with multiple words will use initial capitals for subsequent words.
 Names that are chosen should be meaningful and Hungarian notation is NOT to be used.
 Source files must be named with the suffix \texttt{.c} or \texttt{.h} (lower case).
@@ -67,6 +68,8 @@ Unacceptable variable names: \texttt{FILE *fp; char *aPtr; char *thingStr;}
 \label{sec:naming-constants}
 \#define’d constants are in all uppercase letters, with underscores (\_) being used to seperate multiple words. (The exceptions are defines \texttt{true} and \texttt{false} to comply with c99).
 
+NOTE: Variables declared with the \texttt{const} keyword are to use variable naming, as per~\ref{sec:naming-variable}.
+
 Examples: \texttt{MAX\_BIT}, \texttt{DEFAULT\_SPEED}
 
 \subsection{Function names}
@@ -78,7 +81,7 @@ Example function names: \texttt{main()}, \texttt{reset\_secret\_string()}
 \label{sec:type-names}
 Type names (i.e. from typedefs), structure and union names should begin with capital letters and use initial capitals for subsequent words.
 
-Example typedef/structure/union names: \texttt{SortType}, \texttt{FileData}, \texttt{struct Node}
+Example typedef/structure/union names: \texttt{Contact}, \texttt{FileData}, \texttt{struct Node}
 
 \begin{multicols}{2}
 \lstset{caption={Struct naming and declaration}, label={lst:naming-struct}}
@@ -268,7 +271,7 @@ int divide(int x, int y) {
 \subsection{Horizontal whitespace}
 Use horizontal whitespace to organize each line of code into meaningful parts.
 It is bad style to not use spaces within a line.
-Space must be added after each comma and semicolon.
+Space must be added after each comma, as well as each semicolon that is not on the end of a line.
 Space should also be added either side of all assignment and binary operators (\texttt{=~+=~/~-~*~+}~etc).
 There should be no spaces added around unary operators (\texttt{\&~*~+~-~\propertilde~!~++~--}) and struct operators (\texttt{point->x}, \texttt{player.name}).
 
@@ -446,3 +449,4 @@ None of these are things you could do by accident.
 
 
 \end{document}
+
