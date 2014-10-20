@@ -39,7 +39,7 @@
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Example} % Listing -> Example
 
-\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.1}
+\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.2}
 \author{The University of Queensland\\School of Information Technology and Electrical Engineering}
 \date{September 2014}
 
@@ -276,6 +276,7 @@ Space should also be added either side of all assignment and binary operators (\
 There should be no spaces added around unary operators (\texttt{\&~*~+~-~\propertilde~!~++~--}) and struct operators (\texttt{point->x}, \texttt{player.name}).
 
 \begin{multicols}{2}
+\textbf{Acceptable horizontal whitespace}
 \lstset{caption={Acceptable horizontal whitespace: commas}, label={lst:horiz-good-comma}}
 \begin{lstlisting}
 add_up(a, b, c, d);
@@ -284,7 +285,7 @@ int *a, b, c[10];
 
 \lstset{caption={Acceptable horizontal whitespace: semi-colons}, label={lst:horiz-good-semicolon}}
 \begin{lstlisting}
-for (i = 0; i<10; i++)
+for (i = 0; i < 10; i++)
 \end{lstlisting}
 
 \lstset{caption={Acceptable horizontal whitespace: assignment and binary operators}, label={lst:horiz-good-assign}}
@@ -301,6 +302,7 @@ width = point->y;
 \vfill
 \columnbreak
 
+\textbf{Unacceptable horizontal whitespace}
 \lstset{caption={Unacceptable horizontal whitespace: commas}, label={lst:horiz-bad-comma}}
 \begin{lstlisting}
 add_up(a,b,c,d);
@@ -393,13 +395,13 @@ If more than one continuation line is required, no further indenting is required
 someFunction(longExpression1, longExpression2, .....,
         longExpressionN);
 
-if(expressionA || expressionB || expressionC || expressionD ||
+if (expressionA || expressionB || expressionC || expressionD ||
         expressionE || expressionF) {
     /* code goes here - indented by 4 spaces */
     ...
 }
 
-if(expressionA || expressionB || expressionC || expressionD ||
+if (expressionA || expressionB || expressionC || expressionD ||
         expressionE || expressionF || expressionG || expressionH ||
         expressionI) {
     /* code goes here - indented by 4 spaces */
@@ -449,4 +451,3 @@ None of these are things you could do by accident.
 
 
 \end{document}
-
