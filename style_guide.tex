@@ -39,9 +39,9 @@
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Example} % Listing -> Example
 
-\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.2}
+\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.3}
 \author{The University of Queensland\\School of Information Technology and Electrical Engineering}
-\date{September 2014}
+\date{September 2016}
 
 \begin{document}
 
@@ -64,9 +64,9 @@ Example filenames: \texttt{hello.c}, \texttt{stringRoutines.c}, \texttt{shared.h
 
 Unacceptable variable names: \texttt{FILE *fp; char *aPtr; char *thingStr;}
 
-\subsection{Defined Constants}
+\subsection{Defined constants and macros}
 \label{sec:naming-constants}
-\#define’d constants are in all uppercase letters, with underscores (\_) being used to seperate multiple words. (The exceptions are defines \texttt{true} and \texttt{false} to comply with c99).
+Preprocessor constants and macros, ie. those defined using \texttt{\#define}, must be named using all uppercase letters, with underscores (\_) used to seperate multiple words.
 
 NOTE: Variables declared with the \texttt{const} keyword are to use variable naming, as per~\ref{sec:naming-variable}.
 
@@ -136,31 +136,21 @@ enum ExitCodes {
 
 \section{Comments}
 Comments should be generously added to describe the intent of the code.
-Comments must be present and meaningful for at least every global variable declaration and function declaration or definition.
-Other comments are expected in code which is tricky, lengthy or where functionality is not immediately obvious.
+They are expected in code which is tricky, lengthy or where functionality is not immediately obvious.
 It is reasonable to assume that the reader has a decent knowledge of the C programming language, so it is not necessary to comment every line within a function.
+
+Comments must be present and meaningful for each of the following:
+\begin{itemize}
+    \item Global variables
+    \item Function declarations or definitions
+    \item Enum definitions
+    \item Struct definitions
+\end{itemize}
 
 Function comments should describe parameters, return values and error conditions.
 They should not include parameter types, nor should they include the function prototype.
 If an adequate comment is given for a function declaration, it need not be repeated for the associated function definition.
-
-No comment is needed for the main() function.
-
-You may use \texttt{//} comments in c99 assignments.
-
-\lstset{caption={Comments for global variables and function prototypes}, label={lst:comments-global}}
-\begin{lstlisting}
-/* Global Variables */
-/* The map to use for the game */
-char **map;
-/* Width of the map */
-int width;
-
-/* Prototypes (NOTE: function comments are not required here.) */
-/* Returns the sum of a and b */
-int sum_function(int a, int b);
-\end{lstlisting}
-
+No comment is needed for the \texttt{main()} function.
 
 \clearpage
 \section{Braces}
@@ -412,21 +402,23 @@ if (expressionA || expressionB || expressionC || expressionD ||
 
 \section{Overall}
 \subsection{Compilation}
-Your assignments use either ``ANSI C'' (C90) or C99 (Your lecturer will tell you which one applies).
-
-For ANSI C you must compile with the flags: \texttt{-Wall -pedantic -ansi}
-
-For C99 use: \texttt{-Wall -pedantic -std=gnu99}
+Your assignments will use the C99 standard, and must be compiled with the following flags as a minimum: \texttt{-Wall -pedantic -std=gnu99}
 
 No warnings or errors should be reported.
 If warnings or errors are reported, they will be treated as style violations.
 
-Every .c file in your assignment submission (and any custom .h files they \#include) will be checked for style.
+Every source file in your assignment submission (including .c files and any custom .h files they \texttt{\#include}) will be checked for style exactly as committed to the repository.
 This applies whether or not they are linked into executables.
 To facilitate this process, any .c files in your submission which do not compile individually (ie \texttt{gcc -c file.c} +relevant flags) will attract an additional penalty equivalent to 5 compiler warnings per file.
 
-Every .h file in your submission must make sense without reference to any other files other than those which it \#includes.
+Every .h file in your submission must make sense without reference to any other files, other than those which it references by \texttt{\#include}.
 Specifically, any declarations must be complete and all types, declarations and any definitions used in the .h file must either come from the .h file itself, or from included headers.
+
+Any components which are obfuscated, not in standard forms or need to be transformed by extra tools in order to be readable will be deemed to be without academic merit and will be removed before compilation is attempted.
+
+\subsection{File encoding}
+All source files must use an ASCII-compatible encoding. 
+Files should use Unix line endings (\texttt{\textbackslash n}).
 
 \subsection{Function length}
 Functions should not exceed 50 lines in length, including any comments.
@@ -448,6 +440,5 @@ None of these are things you could do by accident.
 \item \underline{Goto}: While \texttt{goto} is a legal part of the C language, nothing in this course requires its use.
 \item \underline{Digraphs} and \underline{Trigraphs}: This course uses systems which support ASCII or unicode and so have all the required characters.
 \end{itemize}
-
 
 \end{document}
