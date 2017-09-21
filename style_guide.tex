@@ -39,9 +39,9 @@
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Example} % Listing -> Example
 
-\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.3}
+\title{CSSE2310/CSSE7231\\C Programming Style Guide\\Version 2.0.4}
 \author{The University of Queensland\\School of Information Technology and Electrical Engineering}
-\date{September 2016}
+\date{September 2017}
 
 \begin{document}
 
@@ -401,6 +401,14 @@ if (expressionA || expressionB || expressionC || expressionD ||
 
 
 \section{Overall}
+Source code should be written to be clear and readable.
+Anything which works against your code being clear and readable may incur additional ``general'' penalties.
+For example (but not restricted to):
+\begin{itemize}
+\item Use of global variables should be limited to an absolute minimum, where functionality of the program deems them necessary.
+\item Defined constants should be used instead of number and character literals (ie. magic numbers) scattered throughout code without context.
+\end{itemize}
+
 \subsection{Compilation}
 Your assignments will use the C99 standard, and must be compiled with the following flags as a minimum: \texttt{-Wall -pedantic -std=gnu99}
 
